@@ -1,7 +1,7 @@
 import time
 import string
 counter = 0
-limit = 1500000
+limit = 1575000
 start_time = time.time()
 while counter < limit:
     print ("The wretched counter is: ", counter)

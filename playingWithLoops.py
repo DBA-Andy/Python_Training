@@ -5,7 +5,7 @@ limit = 1575000
 start_time = time.time()
 while counter < limit:
     print ("The wretched counter is: ", counter)
-    counter = counter + 5
+    counter = counter + 1
 print ("The elapsed time to count to", limit, "is: ", time.time() - start_time)
 	
 start_time = time.time()

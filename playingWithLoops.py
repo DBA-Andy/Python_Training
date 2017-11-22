@@ -24,5 +24,5 @@ def for_loop():
 start_time = time.time()
 for x in range(10000):
     while_loop(x,0)
-print ("The elapsed time to count to iterateis: ", (round((time.time() - start_time)/60,2)))
+print ("The elapsed time to count to iterate is: ", (round((time.time() - start_time)/60,2)))
     

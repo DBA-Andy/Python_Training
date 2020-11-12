@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 # 
 # Example file for parsing and processing XML
 #

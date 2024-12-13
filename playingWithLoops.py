@@ -8,11 +8,11 @@ def while_loop(limit, counter=0):
     numbers = []
     while counter <= limit:
          ''' Iterate through a meaningless list, at the end of which we'll print how long it took, and the contents of an arbitrary list we created '''
-         print ("The wretched counter is: ", counter)
+         #print ("The wretched counter is: ", counter)
          numbers.append(counter)
          counter = counter + 1
     #print ("The contents of the Numbers list are: ", numbers)
-    print ("this ends my while loop for ", limit)
+    #print ("this ends my while loop for ", limit)
 
 def for_loop():
     start_time = time.time()

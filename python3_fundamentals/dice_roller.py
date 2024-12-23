@@ -8,10 +8,11 @@ def roll_dice(p_dice_sides, p_dice_count,p_modifier):
         v_dice_list.append(v_dice_roll)
         print (f"Dice {i+1} rolled a {v_dice_roll}")
 
-    if p_dice_sides == 20 and v_dice_roll == 20:
-        print ("CRITICAL SUCCESS!")
-    elif p_dice_sides == 20 and v_dice_roll == 1:
-        print ("CRITICAL FAIL!")
+    if p_dice_sides == 20:
+        if v_dice_roll == 20:
+            print ("CRITICAL SUCCESS!")
+        elif v_dice_roll == 1:
+            print ("CRITICAL FAIL!")
 
     return sum(v_dice_list)+p_modifier
 

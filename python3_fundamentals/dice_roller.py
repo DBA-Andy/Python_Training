@@ -31,8 +31,8 @@ def prompt_until_valid(p_prompt):
         if v_question_response and not v_question_response.isnumeric():
             print ("Only a number is valid here!")
             v_question_response=None
-        elif p_prompt == 'Sides' and v_question_response and int(v_question_response) not in v_valid_sides:
-            print (f"Only the values {sorted(v_valid_sides)} are allowed")
+        elif p_prompt == 'Sides' and v_question_response and int(v_question_response) not in g_valid_sides:
+            print (f"Only the values {sorted(g_valid_sides)} are allowed")
             v_question_response=None
 
     return int(v_question_response)
@@ -44,7 +44,7 @@ def main():
     v_parser.add_argument('--m','--mod',type=int)
     v_args = v_parser.parse_args()
     
-    if v_args.d and int(v_args.d) in v_valid_sides:
+    if v_args.d and int(v_args.d) in g_valid_sides:
         v_dice_sides = int(v_args.d)
     else:
         v_dice_sides = prompt_until_valid("Sides")
@@ -65,6 +65,6 @@ def main():
     print (f"The result of this roll is a {v_result}")
 
 # Define static global variable for use in multiple functions
-v_valid_sides = {4,6,8,10,12,20} # Set ctonaining only valid values in pathfinder for sides of dice
+g_valid_sides = {4,6,8,10,12,20} # Set ctonaining only valid values in pathfinder for sides of dice
 
 main()

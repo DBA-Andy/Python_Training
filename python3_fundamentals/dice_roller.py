@@ -1,23 +1,30 @@
 import random
+import argparse
 
 def roll_dice(p_dice_sides, p_dice_count,p_modifier):
     v_dice_list=[]
     for i in range(p_dice_count):
         v_dice_roll = random.randint(1,p_dice_sides)
         v_dice_list.append(v_dice_roll)
-        print (f"Dice {i+1} rolled is a {v_dice_roll}")
+        print (f"Dice {i+1} rolled a {v_dice_roll}")
+
+    if p_dice_sides == 20 and v_dice_roll == 20:
+        print ("CRITICAL SUCCESS!")
+    elif p_dice_sides == 20 and v_dice_roll == 1:
+        print ("CRITICAL FAIL!")
 
     return sum(v_dice_list)+p_modifier
 
 def prompt_until_valid(p_prompt):
     # Define variables to be used
+    # Dictionary of Prompts
     v_dice_prompts = {'Sides':"Please enter the type of dice to roll.  For example, for a d20, enter 20:\n",
                       'Count':"Please enter the number of dice to roll\n",
-                      'Modifier':"Please enter the modifier for the skill you're rolling for.  If none, enter 0:\n"}
-    v_valid_sides = {4,6,8,10,12,20} # Only valid values in pathfinder
+                      'Modifier':"Please enter the modifier for the skill or attack you're rolling for.  If none, enter 0:\n"}
+    v_valid_sides = {4,6,8,10,12,20} # Set ctonaining only valid values in pathfinder for sides of dice
     v_question_response=None
     
-    # Don't let the caller out until they enter a valid response.
+    # Keep prompting until the caller out until they enter a valid response.
     while not v_question_response:
         v_question_response=input(v_dice_prompts[p_prompt])
         if v_question_response and not v_question_response.isnumeric():
@@ -30,15 +37,29 @@ def prompt_until_valid(p_prompt):
     return int(v_question_response)
 
 def main():
-    v_valid_dice=[4,6,8,10,12,20]
-    v_dice_sides = prompt_until_valid("Sides")
+    v_parser=argparse.ArgumentParser()
+    v_parser.add_argument('--d','--dice',type=int)
+    v_parser.add_argument('--c','--count',type=int)
+    v_parser.add_argument('--m','--mod',type=int)
+    v_args = v_parser.parse_args()
+
+    if v_args.d:
+        v_dice_sides = int(v_args.d)
+    else:
+        v_dice_sides = prompt_until_valid("Sides")
+    
     if v_dice_sides == 20: # You can only roll 1 d20 in my experience, so we'll default to 1 if the sides are 20
         v_dice_count = 1
+    elif v_args.c:
+        v_dice_count = v_args.c
     else:
         v_dice_count = prompt_until_valid("Count")
-    v_modifier = prompt_until_valid("Modifier")
     
-
+    if v_args.m or v_args.m == 0:
+        v_modifier = v_args.m
+    else:
+        v_modifier = prompt_until_valid("Modifier")
+ 
     v_result = roll_dice(v_dice_sides,v_dice_count,v_modifier)
     print (f"The result of this roll is a {v_result}")
 

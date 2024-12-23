@@ -21,7 +21,7 @@ def prompt_until_valid(p_prompt):
     v_dice_prompts = {'Sides':"Please enter the type of dice to roll.  For example, for a d20, enter 20:\n",
                       'Count':"Please enter the number of dice to roll\n",
                       'Modifier':"Please enter the modifier for the skill or attack you're rolling for.  If none, enter 0:\n"}
-    v_valid_sides = {4,6,8,10,12,20} # Set ctonaining only valid values in pathfinder for sides of dice
+    
     v_question_response=None
     
     # Keep prompting until the caller out until they enter a valid response.
@@ -38,12 +38,12 @@ def prompt_until_valid(p_prompt):
 
 def main():
     v_parser=argparse.ArgumentParser()
-    v_parser.add_argument('--d','--dice',type=int)
+    v_parser.add_argument('--d','--dice',type=int,help="Roll a dice with this number of sides.  For example, for a d20, enter 20.")
     v_parser.add_argument('--c','--count',type=int)
     v_parser.add_argument('--m','--mod',type=int)
     v_args = v_parser.parse_args()
-
-    if v_args.d:
+    
+    if v_args.d and int(v_args.d) in v_valid_sides:
         v_dice_sides = int(v_args.d)
     else:
         v_dice_sides = prompt_until_valid("Sides")
@@ -62,5 +62,8 @@ def main():
  
     v_result = roll_dice(v_dice_sides,v_dice_count,v_modifier)
     print (f"The result of this roll is a {v_result}")
+
+# Define static global variable for use in multiple functions
+v_valid_sides = {4,6,8,10,12,20} # Set ctonaining only valid values in pathfinder for sides of dice
 
 main()

@@ -24,7 +24,7 @@ def prompt_until_valid(p_prompt):
             print ("Only a number is valid here!")
             v_question_response=None
         elif p_prompt == 'Sides' and v_question_response and int(v_question_response) not in v_valid_sides:
-            print (f"Only the values {v_valid_sides} are allowed")
+            print (f"Only the values {sorted(v_valid_sides)} are allowed")
             v_question_response=None
 
     return int(v_question_response)
